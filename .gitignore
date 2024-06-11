@@ -455,7 +455,9 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-examples/
+
 src/external/*
 raylib-master/
+
+
 
