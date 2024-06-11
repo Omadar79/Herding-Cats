@@ -2,7 +2,7 @@
 *
 *   raylib - Advance Game template
 *
-*   Screens Functions Declarations (Init, Update, Draw, Unload)
+*   Screens Functions Declarations (Init, update, draw, Unload)
 *
 *   Copyright (c) 2014-2022 Ramon Santamaria (@raysan5)
 *
@@ -25,6 +25,8 @@
 
 #ifndef SCREENS_H
 #define SCREENS_H
+#include "sprite.h"
+
 
 //----------------------------------------------------------------------------------
 // Types and Structures Definition
@@ -36,7 +38,8 @@ typedef enum GameScreen
 	TITLE, 
 	OPTIONS,
 	GAMEPLAY,
-	ENDING 
+	ENDING
+
 } GameScreen;
 
 //----------------------------------------------------------------------------------
@@ -48,6 +51,9 @@ extern Texture2D mainTexture;
 extern Font font;
 extern Music music;
 extern Sound fxCoin;
+extern my_raylib_utils::Sprite* mySprite;
+
+
 
 #ifdef __cplusplus
 extern "C" {            // Prevents name mangling of functions
