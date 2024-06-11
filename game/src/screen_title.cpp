@@ -41,17 +41,11 @@ void InitTitleScreen(void)
       
     framesCounter = 0;
     finishScreen = 0;
-    cat1Sprite->setScale(3.0f);
     cat1Sprite->setFlipHorizontal(false);
-    cat2Sprite->setScale(3.0f);
     cat2Sprite->setFlipHorizontal(false);
-    cat3Sprite->setScale(3.0f);
     cat3Sprite->setFlipHorizontal(false);
-    cat4Sprite->setScale(3.0f);
     cat4Sprite->setFlipHorizontal(true);
-    cat5Sprite->setScale(3.0f);
     cat5Sprite->setFlipHorizontal(true);
-    cat6Sprite->setScale(3.0f);
     cat6Sprite->setFlipHorizontal(true);
 }
 
@@ -63,12 +57,12 @@ void UpdateTitleScreen(void)
     if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
     {
         //finishScreen = 1;   // OPTIONS
-    //    finishScreen = 2;   // GAMEPLAY
-      //  PlaySound(fxCoin);
+		//finishScreen = 2;   // GAMEPLAY
+		//PlaySound(fxCoin);
     
 
     }
-    cat1Sprite->update( GetFrameTime());
+    cat1Sprite->update(GetFrameTime());
     cat2Sprite->update(GetFrameTime());
     cat3Sprite->update(GetFrameTime());
 	cat4Sprite->update(GetFrameTime());
@@ -82,19 +76,22 @@ void DrawTitleScreen(void)
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLUE);
     Vector2 pos = { 30, 500 };
 
-    DrawText("Press Enter to Start Game", 150, 400, 20, WHITE);
+    DrawText("Press Enter to Start Game", 350, 700, 20, WHITE);
 
-    int mainLogoX= GetScreenWidth() / 2 - mainTexture.width / 2;
-    int mainLogoY = GetScreenHeight() / 3 - mainTexture.height / 2;
+    double scale = 1.5;
 
-    DrawTexture(mainTexture, mainLogoX, mainLogoY, WHITE);
+    float mainLogoX = GetScreenWidth() / 2 - (mainTexture.width * scale) / 2;
+    float mainLogoY = GetScreenHeight() / 3 - (mainTexture.height * scale) / 2 ;
 
-    cat1Sprite->draw(50,50);
-    cat2Sprite->draw(50, 150);
-    cat3Sprite->draw(50, 300);
-    cat4Sprite->draw(700, 50);
-    cat5Sprite->draw(700, 150);
-    cat6Sprite->draw(700, 300);
+    Vector2 logoPos = { mainLogoX, mainLogoY };
+    DrawTextureEx(mainTexture, logoPos, 0, scale, WHITE);
+
+    cat1Sprite->draw(75,50);
+    cat2Sprite->draw(75, 350);
+    cat3Sprite->draw(75, 600);
+    cat4Sprite->draw(900, 50);
+    cat5Sprite->draw(900, 350);
+    cat6Sprite->draw(900, 600);
 }
 
 // Title Screen Unload logic

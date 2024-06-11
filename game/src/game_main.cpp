@@ -36,8 +36,8 @@ my_raylib_utils::Sprite* cat6Sprite = nullptr;
 
 //------------------------------------------------------------------------------
 // local variables
-static const int screenWidth = 800;
-static const int screenHeight = 600;
+static const int screenWidth =1024;
+static const int screenHeight = 768;
 
 // Required variables to manage screen transitions (fade-in, fade-out)
 static float transAlpha = 0.0f;
@@ -110,14 +110,18 @@ void InitializeAssets(void)
 	music = LoadMusicStream("resources/music/cats_spies.wav");
 	fxCoin = LoadSound("resources/sfx/confirm.wav");
 
+	float idleFrameTime = 0.2f;
+	float itchFrameTime = 0.4f;
+	float lickingFrameTime = 0.1f;
+
 	mainTexture = LoadTextureFromImage(logoImage);
 	// Create a sprite object
-	cat1Sprite = new my_raylib_utils::Sprite(2);
-	cat1Sprite->addAnimation("idle", "resources/sprites/Cat-1-Idle.png", 50, 50, 10, 0.1f);
-	cat1Sprite->addAnimation("itch", "resources/sprites/Cat-1-Itch.png", 50, 50, 2, 0.1f);
+	cat1Sprite = new my_raylib_utils::Sprite(3);
+	cat1Sprite->addAnimation("idle", "resources/sprites/Cat-1-Idle.png", 50, 50, 10, idleFrameTime);
+	cat1Sprite->addAnimation("itch", "resources/sprites/Cat-1-Itch.png", 50, 50, 2, itchFrameTime);
 	cat1Sprite->addAnimation("laying", "resources/sprites/Cat-1-Laying.png", 50, 50, 8, 0.1f);
-	cat1Sprite->addAnimation("licking", "resources/sprites/Cat-1-Licking.png", 50, 50, 5, 0.1f);
-	cat1Sprite->addAnimation("lickingButt", "resources/sprites/Cat-1-LickingButt.png", 50, 50, 5, 0.1f);
+	cat1Sprite->addAnimation("licking", "resources/sprites/Cat-1-Licking.png", 50, 50, 5, lickingFrameTime);
+	cat1Sprite->addAnimation("lickingButt", "resources/sprites/Cat-1-LickingButt.png", 50, 50, 5, lickingFrameTime);
 	cat1Sprite->addAnimation("stretching", "resources/sprites/Cat-1-Stretching.png", 50, 50, 15, 0.1f);
 	cat1Sprite->addAnimation("meow", "resources/sprites/Cat-1-Meow.png", 50, 50, 4, 0.1f);
 	cat1Sprite->addAnimation("walk", "resources/sprites/Cat-1-Walk.png", 50, 50, 8, 0.1f);
@@ -127,12 +131,12 @@ void InitializeAssets(void)
 	cat1Sprite->addAnimation("sleeping2", "resources/sprites/Cat-1-Sleeping2.png", 50, 50, 1, 0.1f);
 	cat1Sprite->setAnimation("idle");
 
-	cat2Sprite = new my_raylib_utils::Sprite(2);
-	cat2Sprite->addAnimation("idle", "resources/sprites/Cat-2-Idle.png", 50, 50, 10, 0.1f);
-	cat2Sprite->addAnimation("itch", "resources/sprites/Cat-2-Itch.png", 50, 50, 2, 0.1f);
+	cat2Sprite = new my_raylib_utils::Sprite(3);
+	cat2Sprite->addAnimation("idle", "resources/sprites/Cat-2-Idle.png", 50, 50, 10, idleFrameTime);
+	cat2Sprite->addAnimation("itch", "resources/sprites/Cat-2-Itch.png", 50, 50, 2, itchFrameTime);
 	cat2Sprite->addAnimation("laying", "resources/sprites/Cat-2-Laying.png", 50, 50, 8, 0.1f);
-	cat2Sprite->addAnimation("licking", "resources/sprites/Cat-2-Licking.png", 50, 50, 5, 0.1f);
-	cat2Sprite->addAnimation("lickingButt", "resources/sprites/Cat-2-LickingButt.png", 50, 50, 5, 0.1f);
+	cat2Sprite->addAnimation("licking", "resources/sprites/Cat-2-Licking.png", 50, 50, 5, lickingFrameTime);
+	cat2Sprite->addAnimation("lickingButt", "resources/sprites/Cat-2-LickingButt.png", 50, 50, 5, lickingFrameTime);
 	cat2Sprite->addAnimation("stretching", "resources/sprites/Cat-2-Stretching.png", 50, 50, 15, 0.1f);
 	cat2Sprite->addAnimation("meow", "resources/sprites/Cat-2-Meow.png", 50, 50, 4, 0.1f);
 	cat2Sprite->addAnimation("walk", "resources/sprites/Cat-2-Walk.png", 50, 50, 8, 0.1f);
@@ -140,15 +144,14 @@ void InitializeAssets(void)
 	cat2Sprite->addAnimation("sitting", "resources/sprites/Cat-2-Sitting.png", 50, 50, 1, 0.1f);
 	cat2Sprite->addAnimation("sleeping1", "resources/sprites/Cat-2-Sleeping1.png", 50, 50, 1, 0.1f);
 	cat2Sprite->addAnimation("sleeping2", "resources/sprites/Cat-2-Sleeping2.png", 50, 50, 1, 0.1f);
-
 	cat2Sprite->setAnimation("itch");
 
-	cat3Sprite = new my_raylib_utils::Sprite(2);
-	cat3Sprite->addAnimation("idle", "resources/sprites/Cat-3-Idle.png", 50, 50, 10, 0.1f);
-	cat3Sprite->addAnimation("itch", "resources/sprites/Cat-3-Itch.png", 50, 50, 2, 0.1f);
+	cat3Sprite = new my_raylib_utils::Sprite(3);
+	cat3Sprite->addAnimation("idle", "resources/sprites/Cat-3-Idle.png", 50, 50, 10, idleFrameTime);
+	cat3Sprite->addAnimation("itch", "resources/sprites/Cat-3-Itch.png", 50, 50, 2, itchFrameTime);
 	cat3Sprite->addAnimation("laying", "resources/sprites/Cat-3-Laying.png", 50, 50, 8, 0.1f);
-	cat3Sprite->addAnimation("licking", "resources/sprites/Cat-3-Licking.png", 50, 50, 5, 0.1f);
-	cat3Sprite->addAnimation("lickingButt", "resources/sprites/Cat-3-LickingButt.png", 50, 50, 5, 0.1f);
+	cat3Sprite->addAnimation("licking", "resources/sprites/Cat-3-Licking.png", 50, 50, 5, lickingFrameTime);
+	cat3Sprite->addAnimation("lickingButt", "resources/sprites/Cat-3-LickingButt.png", 50, 50, 5, lickingFrameTime);
 	cat3Sprite->addAnimation("stretching", "resources/sprites/Cat-3-Stretching.png", 50, 50, 15, 0.1f);
 	cat3Sprite->addAnimation("meow", "resources/sprites/Cat-3-Meow.png", 50, 50, 4, 0.1f);
 	cat3Sprite->addAnimation("walk", "resources/sprites/Cat-3-Walk.png", 50, 50, 8, 0.1f);
@@ -156,14 +159,14 @@ void InitializeAssets(void)
 	cat3Sprite->addAnimation("sitting", "resources/sprites/Cat-3-Sitting.png", 50, 50, 1, 0.1f);
 	cat3Sprite->addAnimation("sleeping1", "resources/sprites/Cat-3-Sleeping1.png", 50, 50, 1, 0.1f);
 	cat3Sprite->addAnimation("sleeping2", "resources/sprites/Cat-3-Sleeping2.png", 50, 50, 1, 0.1f);
-	cat3Sprite->setAnimation("stretching");
+	cat3Sprite->setAnimation("walk");
 
-	cat4Sprite = new my_raylib_utils::Sprite(2);
-	cat4Sprite->addAnimation("idle", "resources/sprites/Cat-4-Idle.png", 50, 50, 10, 0.1f);
-	cat4Sprite->addAnimation("itch", "resources/sprites/Cat-4-Itch.png", 50, 50, 2, 0.1f);
+	cat4Sprite = new my_raylib_utils::Sprite(3);
+	cat4Sprite->addAnimation("idle", "resources/sprites/Cat-4-Idle.png", 50, 50, 10, idleFrameTime);
+	cat4Sprite->addAnimation("itch", "resources/sprites/Cat-4-Itch.png", 50, 50, 2, itchFrameTime);
 	cat4Sprite->addAnimation("laying", "resources/sprites/Cat-4-Laying.png", 50, 50, 8, 0.1f);
-	cat4Sprite->addAnimation("licking", "resources/sprites/Cat-4-Licking.png", 50, 50, 5, 0.1f);
-	cat4Sprite->addAnimation("lickingButt", "resources/sprites/Cat-4-LickingButt.png", 50, 50, 5, 0.1f);
+	cat4Sprite->addAnimation("licking", "resources/sprites/Cat-4-Licking.png", 50, 50, 5, lickingFrameTime);
+	cat4Sprite->addAnimation("lickingButt", "resources/sprites/Cat-4-LickingButt.png", 50, 50, 5, lickingFrameTime);
 	cat4Sprite->addAnimation("stretching", "resources/sprites/Cat-4-Stretching.png", 50, 50, 15, 0.1f);
 	cat4Sprite->addAnimation("meow", "resources/sprites/Cat-4-Meow.png", 50, 50, 4, 0.1f);
 	cat4Sprite->addAnimation("walk", "resources/sprites/Cat-4-Walk.png", 50, 50, 8, 0.1f);
@@ -173,12 +176,12 @@ void InitializeAssets(void)
 	cat4Sprite->addAnimation("sleeping2", "resources/sprites/Cat-4-Sleeping2.png", 50, 50, 1, 0.1f);
 	cat4Sprite->setAnimation("lickingButt");
 
-	cat5Sprite = new my_raylib_utils::Sprite(2);
-	cat5Sprite->addAnimation("idle", "resources/sprites/Cat-5-Idle.png", 50, 50, 10, 0.1f);
-	cat5Sprite->addAnimation("itch", "resources/sprites/Cat-5-Itch.png", 50, 50, 2, 0.1f);
+	cat5Sprite = new my_raylib_utils::Sprite(3);
+	cat5Sprite->addAnimation("idle", "resources/sprites/Cat-5-Idle.png", 50, 50, 10, idleFrameTime);
+	cat5Sprite->addAnimation("itch", "resources/sprites/Cat-5-Itch.png", 50, 50, 2, itchFrameTime);
 	cat5Sprite->addAnimation("laying", "resources/sprites/Cat-5-Laying.png", 50, 50, 8, 0.1f);
-	cat5Sprite->addAnimation("licking", "resources/sprites/Cat-5-Licking.png", 50, 50, 5, 0.1f);
-	cat5Sprite->addAnimation("lickingButt", "resources/sprites/Cat-5-LickingButt.png", 50, 50, 5, 0.1f);
+	cat5Sprite->addAnimation("licking", "resources/sprites/Cat-5-Licking.png", 50, 50, 5, lickingFrameTime);
+	cat5Sprite->addAnimation("lickingButt", "resources/sprites/Cat-5-LickingButt.png", 50, 50, 5, lickingFrameTime);
 	cat5Sprite->addAnimation("stretching", "resources/sprites/Cat-5-Stretching.png", 50, 50, 15, 0.1f);
 	cat5Sprite->addAnimation("meow", "resources/sprites/Cat-5-Meow.png", 50, 50, 4, 0.1f);
 	cat5Sprite->addAnimation("walk", "resources/sprites/Cat-5-Walk.png", 50, 50, 8, 0.1f);
@@ -186,14 +189,14 @@ void InitializeAssets(void)
 	cat5Sprite->addAnimation("sitting", "resources/sprites/Cat-5-Sitting.png", 50, 50, 1, 0.1f);
 	cat5Sprite->addAnimation("sleeping1", "resources/sprites/Cat-5-Sleeping1.png", 50, 50, 1, 0.1f);
 	cat5Sprite->addAnimation("sleeping2", "resources/sprites/Cat-5-Sleeping2.png", 50, 50, 1, 0.1f);
-	cat5Sprite->setAnimation("sleeping1");
+	cat5Sprite->setAnimation("run");
 
-	cat6Sprite = new my_raylib_utils::Sprite(2);
-	cat6Sprite->addAnimation("idle", "resources/sprites/Cat-6-Idle.png", 50, 50, 10, 0.1f);
-	cat6Sprite->addAnimation("itch", "resources/sprites/Cat-6-Itch.png", 50, 50, 2, 0.1f);
+	cat6Sprite = new my_raylib_utils::Sprite(3);
+	cat6Sprite->addAnimation("idle", "resources/sprites/Cat-6-Idle.png", 50, 50, 10, idleFrameTime);
+	cat6Sprite->addAnimation("itch", "resources/sprites/Cat-6-Itch.png", 50, 50, 2, itchFrameTime);
 	cat6Sprite->addAnimation("laying", "resources/sprites/Cat-6-Laying.png", 50, 50, 8, 0.1f);
-	cat6Sprite->addAnimation("licking", "resources/sprites/Cat-6-Licking.png", 50, 50, 5, 0.1f);
-	cat6Sprite->addAnimation("lickingButt", "resources/sprites/Cat-6-LickingButt.png", 50, 50, 5, 0.1f);
+	cat6Sprite->addAnimation("licking", "resources/sprites/Cat-6-Licking.png", 50, 50, 5, lickingFrameTime);
+	cat6Sprite->addAnimation("lickingButt", "resources/sprites/Cat-6-LickingButt.png", 50, 50, 5, lickingFrameTime);
 	cat6Sprite->addAnimation("stretching", "resources/sprites/Cat-6-Stretching.png", 50, 50, 15, 0.1f);
 	cat6Sprite->addAnimation("meow", "resources/sprites/Cat-6-Meow.png", 50, 50, 4, 0.1f);
 	cat6Sprite->addAnimation("walk", "resources/sprites/Cat-6-Walk.png", 50, 50, 8, 0.1f);

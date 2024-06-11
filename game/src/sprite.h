@@ -10,6 +10,7 @@ namespace my_raylib_utils
     class Sprite
     {
     public:
+        Sprite();
         Sprite(float scale);
         ~Sprite();
        
