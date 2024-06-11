@@ -1,12 +1,12 @@
-#ifndef ANIMATION_H
-#define ANIMATION_H
+#ifndef SPRITEANIMATION_H
+#define SPRITEANIMATION_H
 
 #include <string>
 #include "raylib.h"
 
 namespace my_raylib_utils
 {
-    struct Animation
+    struct SpriteAnimation
     {
         Texture2D _texture;
         int _frameWidth;
@@ -15,9 +15,9 @@ namespace my_raylib_utils
         float _frameTime;
         Rectangle* _frames;
 
-        Animation(const std::string& file_path, int frame_width, int frame_height, int num_frames, float frame_time);
+        SpriteAnimation(const std::string& file_path, int frame_width, int frame_height, int num_frames, float frame_time);
 
-    	~Animation();
+    	~SpriteAnimation();
 
     };
 

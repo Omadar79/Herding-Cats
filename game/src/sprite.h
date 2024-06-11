@@ -2,32 +2,39 @@
 #define SPRITE_H
 
 #include <string>
-#include "raylib.h"
+#include <unordered_map>
+#include "sprite_animation.h"
 
 namespace my_raylib_utils
 {
     class Sprite
     {
     public:
-        Sprite(const std::string& file_path, int frame_width, int frame_height, int num_frames, float frame_time);
+        Sprite(float scale);
         ~Sprite();
        
-        void update();
-        void draw(Vector2 position);
-        void setScale(float new_scale);
+        void addAnimation(const std::string& name, const std::string& file_Path, int frame_width, int frame_height, int num_frames, float frame_time);
+        void setAnimation(const std::string& name);
+
+        void update(float delta_time);
+        void draw(int x, int y) const;
+        void setScale(float new_Scale);
+
+        void setFlip(bool flip_h, bool flip_v);
+        void setFlipHorizontal(bool flip);
+        void setFlipVertical(bool flip);
+
+        bool isFlippedHorizontal() const;
+        bool isFlippedVertical() const;
 
     private:
-        Texture2D _texture; //raylib texture
-        int _frameWidth;
-        int _frameHeight;
-        int _numFrames;
-        float _frameTime;
+        std::unordered_map<std::string, SpriteAnimation*> _animations;
+        SpriteAnimation* _currentAnimation;
         float _currentFrameTime;
         int _currentFrame;
-        Rectangle _sourceRec;
-        Rectangle _destRec;
-        Vector2 _origin;
-        float _scale; // Scaling factor
+        float _scale;
+        bool _flipH;
+        bool _flipV;
     };
 
   

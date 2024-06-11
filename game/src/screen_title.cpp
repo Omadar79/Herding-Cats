@@ -41,23 +41,39 @@ void InitTitleScreen(void)
       
     framesCounter = 0;
     finishScreen = 0;
-    mySprite->setScale(2.0f);
+    cat1Sprite->setScale(3.0f);
+    cat1Sprite->setFlipHorizontal(false);
+    cat2Sprite->setScale(3.0f);
+    cat2Sprite->setFlipHorizontal(false);
+    cat3Sprite->setScale(3.0f);
+    cat3Sprite->setFlipHorizontal(false);
+    cat4Sprite->setScale(3.0f);
+    cat4Sprite->setFlipHorizontal(true);
+    cat5Sprite->setScale(3.0f);
+    cat5Sprite->setFlipHorizontal(true);
+    cat6Sprite->setScale(3.0f);
+    cat6Sprite->setFlipHorizontal(true);
 }
 
 // Title Screen Update logic
 void UpdateTitleScreen(void)
 {
-    // TODO: Update TITLE screen variables here!
 
     // Press enter or tap to change to GAMEPLAY screen
     if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
     {
         //finishScreen = 1;   // OPTIONS
-        finishScreen = 2;   // GAMEPLAY
-        PlaySound(fxCoin);
+    //    finishScreen = 2;   // GAMEPLAY
+      //  PlaySound(fxCoin);
+    
+
     }
-	
-    mySprite->update();
+    cat1Sprite->update( GetFrameTime());
+    cat2Sprite->update(GetFrameTime());
+    cat3Sprite->update(GetFrameTime());
+	cat4Sprite->update(GetFrameTime());
+    cat5Sprite->update(GetFrameTime());
+    cat6Sprite->update(GetFrameTime());
 }
 
 // Title Screen Draw logic
@@ -73,7 +89,12 @@ void DrawTitleScreen(void)
 
     DrawTexture(mainTexture, mainLogoX, mainLogoY, WHITE);
 
-    mySprite->draw(Vector2(pos));
+    cat1Sprite->draw(50,50);
+    cat2Sprite->draw(50, 150);
+    cat3Sprite->draw(50, 300);
+    cat4Sprite->draw(700, 50);
+    cat5Sprite->draw(700, 150);
+    cat6Sprite->draw(700, 300);
 }
 
 // Title Screen Unload logic

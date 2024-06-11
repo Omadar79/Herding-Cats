@@ -5,60 +5,105 @@
 *   Programming: Dustin Taub
 * 
 ********************************************************************************************/
-
 #include "sprite.h"
-#include "raylib.h"
-#include <string>
 
 namespace my_raylib_utils
 {
-    Sprite::Sprite(const std::string& file_path, int frame_width, int frame_height, int num_frames, float frame_time)
-        : _frameWidth(frame_width), _frameHeight(frame_height), _numFrames(num_frames), _frameTime(frame_time), _currentFrameTime(0), _currentFrame(0)
-    {
-        _texture = LoadTexture(file_path.c_str());
-        _sourceRec = { 0.0f, 0.0f, static_cast<float>(frame_width), static_cast<float>(frame_height) };
-        _destRec = { 0.0f, 0.0f, static_cast<float>(frame_width), static_cast<float>(frame_height) };
-        _origin = { static_cast<float>(frame_width) / 2, static_cast<float>(frame_height) / 2 };
-        _scale = 1.0f;
-    }
+   
+    Sprite::Sprite(float scale)
+		: _currentAnimation(nullptr), _currentFrameTime(0), _currentFrame(0), _scale(scale),_flipH(false), _flipV(false) {}
 
     Sprite::~Sprite()
     {
-        UnloadTexture(_texture);
-    }
-
-
-    void Sprite::update()
-    {
-        _currentFrameTime += GetFrameTime();
-
-        if (_currentFrameTime >= _frameTime)
+        for (auto& anim : _animations) 
         {
-            _currentFrameTime = 0;
-            _currentFrame++;
-            if (_currentFrame >= _numFrames)
-            {
-                _currentFrame = 0;
-            }
-            _sourceRec.x = static_cast<float>(_frameWidth * _currentFrame);
+            delete anim.second;
         }
     }
 
-    void Sprite::draw(Vector2 position) 
-    {
-        _destRec.x = position.x;
-        _destRec.y = position.y;
+    void Sprite::addAnimation(const std::string& name, const std::string& file_Path, int frame_width, int frame_height, int num_frames, float frame_time) {
 
-        Rectangle _draw_Rec = _destRec;
-    	_draw_Rec.height = _draw_Rec.height * _scale;
-        _draw_Rec.width = _draw_Rec.width * _scale;
+        _animations[name] = new SpriteAnimation(file_Path, frame_width, frame_height, num_frames, frame_time);
+        if (!_currentAnimation) 
+        {
+            _currentAnimation = _animations[name];
+        }
+    }
 
-        DrawTexturePro(_texture, _sourceRec, _draw_Rec, _origin, 0.0f, WHITE);
+    void Sprite::setAnimation(const std::string& name)
+	{
+        if (_animations.find(name) != _animations.end())
+        {
+            _currentAnimation = _animations[name];
+            _currentFrame = 0;
+            _currentFrameTime = 0;
+        }
+    }
+
+    void Sprite::update(float delta_time)
+	{
+        if (_currentAnimation) 
+        {
+            _currentFrameTime += delta_time;
+            if (_currentFrameTime >= _currentAnimation->_frameTime)
+            {
+                _currentFrameTime = 0;
+                _currentFrame = (_currentFrame + 1) % _currentAnimation->_numFrames;
+            }
+        }
+    }
+
+    void Sprite::draw(int x, int y) const
+	{
+        if (_currentAnimation)
+        {
+            Rectangle source = _currentAnimation->_frames[_currentFrame];
+            Rectangle dest = {
+                static_cast<float>(x) 
+                , static_cast<float>(y)
+                , static_cast<float>(_currentAnimation->_frameWidth) * _scale 
+                , static_cast<float>(_currentAnimation->_frameHeight) * _scale
+				};
+            Vector2 origin = { dest.width * 0.5f, dest.height * 0.5f }; // put origin in middle;
+
+            source.width = source.width * (_flipH ? -1.0f : 1.0f);
+            source.height = source.height * (_flipV ? -1.0f : 1.0f);
+
+           
+        	DrawTexturePro(_currentAnimation->_texture, source, dest, origin, 0.0f, WHITE);
+          
+        }
     }
 
     void Sprite::setScale(float new_scale)
 	{
         _scale = new_scale;
+    }
+
+    void Sprite::setFlip(bool flip_h, bool flip_v)
+	{
+        this->_flipH = flip_h;
+        this->_flipV = flip_v;
+    }
+
+    void Sprite::setFlipVertical(bool flip)
+    {
+        this->_flipV = flip;
+    }
+
+    void Sprite::setFlipHorizontal(bool flip)
+    {
+        this->_flipH = flip;
+    }
+
+    bool Sprite::isFlippedHorizontal() const
+    {
+        return this->_flipH;
+    }
+
+    bool Sprite::isFlippedVertical() const
+    {
+        return this->_flipV;
     }
 
 }

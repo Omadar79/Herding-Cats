@@ -51,7 +51,12 @@ extern Texture2D mainTexture;
 extern Font font;
 extern Music music;
 extern Sound fxCoin;
-extern my_raylib_utils::Sprite* mySprite;
+extern my_raylib_utils::Sprite* cat1Sprite;
+extern my_raylib_utils::Sprite* cat2Sprite;
+extern my_raylib_utils::Sprite* cat3Sprite;
+extern my_raylib_utils::Sprite* cat4Sprite;
+extern my_raylib_utils::Sprite* cat5Sprite;
+extern my_raylib_utils::Sprite* cat6Sprite;
 
 
 
