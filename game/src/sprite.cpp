@@ -9,7 +9,11 @@
 
 namespace my_raylib_utils
 {
-   
+
+    Sprite::Sprite()
+        : _currentAnimation(nullptr), _currentFrameTime(0), _currentFrame(0), _scale(1.0f), _flipH(false), _flipV(false) {}
+
+
     Sprite::Sprite(float scale)
 		: _currentAnimation(nullptr), _currentFrameTime(0), _currentFrame(0), _scale(scale),_flipH(false), _flipV(false) {}
 

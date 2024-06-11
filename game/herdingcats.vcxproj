@@ -267,12 +267,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="sprite_animation.h" />
     <ClInclude Include="src\screens.h" />
     <ClInclude Include="src\sprite.h" />
+    <ClInclude Include="src\sprite_animation.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sprite_animation.cpp" />
     <ClCompile Include="src\game_main.cpp" />
     <ClCompile Include="src\screen_ending.cpp" />
     <ClCompile Include="src\screen_gameplay.cpp" />
@@ -280,6 +279,7 @@
     <ClCompile Include="src\screen_options.cpp" />
     <ClCompile Include="src\screen_title.cpp" />
     <ClCompile Include="src\sprite.cpp" />
+    <ClCompile Include="src\sprite_animation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\raylib-master\raylib.vcxproj">
