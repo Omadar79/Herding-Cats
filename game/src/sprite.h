@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include "sprite_animation.h"
 
-namespace my_raylib_utils
+namespace herding_cats_game
 {
     class Sprite
     {
@@ -19,7 +19,7 @@ namespace my_raylib_utils
 
         void update(float delta_time);
         void draw(int x, int y) const;
-        void setScale(float new_Scale);
+        void SetScale(float new_Scale);
 
         void setFlip(bool flip_h, bool flip_v);
         void setFlipHorizontal(bool flip);

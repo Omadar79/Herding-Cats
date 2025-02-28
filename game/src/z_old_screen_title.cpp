@@ -24,12 +24,12 @@
 **********************************************************************************************/
 
 #include "raylib.h"
-#include "screens.h"
+#include "z_old_screens.h"
 
 
 // local variables
-static int framesCounter = 0;
-static int finishScreen = 0;
+static int frame_counter = 0;
+static int finish_screen = 0;
 
 //----------------------------------------------------------------------------------
 // Title Screen Functions Definition
@@ -38,15 +38,15 @@ static int finishScreen = 0;
 // Title Screen Initialization logic
 void InitTitleScreen(void)
 {
-      
-    framesCounter = 0;
-    finishScreen = 0;
-    cat1Sprite->setFlipHorizontal(false);
-    cat2Sprite->setFlipHorizontal(false);
-    cat3Sprite->setFlipHorizontal(false);
-    cat4Sprite->setFlipHorizontal(true);
-    cat5Sprite->setFlipHorizontal(true);
-    cat6Sprite->setFlipHorizontal(true);
+
+    frame_counter = 0;
+    finish_screen = 0;
+    p_cat1_sprite->setFlipHorizontal(false);
+    p_cat2_sprite->setFlipHorizontal(false);
+    p_cat3_sprite->setFlipHorizontal(false);
+    p_cat4_sprite->setFlipHorizontal(true);
+    p_cat5_sprite->setFlipHorizontal(true);
+    p_cat6_sprite->setFlipHorizontal(true);
 }
 
 // Title Screen Update logic
@@ -57,17 +57,17 @@ void UpdateTitleScreen(void)
     if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
     {
         //finishScreen = 1;   // OPTIONS
-		//finishScreen = 2;   // GAMEPLAY
-		//PlaySound(fxCoin);
-    
+        //finishScreen = 2;   // GAMEPLAY
+        //PlaySound(fxCoin);
+
 
     }
-    cat1Sprite->update(GetFrameTime());
-    cat2Sprite->update(GetFrameTime());
-    cat3Sprite->update(GetFrameTime());
-	cat4Sprite->update(GetFrameTime());
-    cat5Sprite->update(GetFrameTime());
-    cat6Sprite->update(GetFrameTime());
+    p_cat1_sprite->update(GetFrameTime());
+    p_cat2_sprite->update(GetFrameTime());
+    p_cat3_sprite->update(GetFrameTime());
+    p_cat4_sprite->update(GetFrameTime());
+    p_cat5_sprite->update(GetFrameTime());
+    p_cat6_sprite->update(GetFrameTime());
 }
 
 // Title Screen Draw logic
@@ -80,18 +80,18 @@ void DrawTitleScreen(void)
 
     double scale = 1.5;
 
-    float mainLogoX = GetScreenWidth() / 2 - (mainTexture.width * scale) / 2;
-    float mainLogoY = GetScreenHeight() / 3 - (mainTexture.height * scale) / 2 ;
+    float mainLogoX = GetScreenWidth() / 2 - (g_main_texture.width * scale) / 2;
+    float mainLogoY = GetScreenHeight() / 3 - (g_main_texture.height * scale) / 2;
 
     Vector2 logoPos = { mainLogoX, mainLogoY };
-    DrawTextureEx(mainTexture, logoPos, 0, scale, WHITE);
+    DrawTextureEx(g_main_texture, logoPos, 0, scale, WHITE);
 
-    cat1Sprite->draw(75,50);
-    cat2Sprite->draw(75, 350);
-    cat3Sprite->draw(75, 600);
-    cat4Sprite->draw(900, 50);
-    cat5Sprite->draw(900, 350);
-    cat6Sprite->draw(900, 600);
+    p_cat1_sprite->draw(75, 50);
+    p_cat2_sprite->draw(75, 350);
+    p_cat3_sprite->draw(75, 600);
+    p_cat4_sprite->draw(900, 50);
+    p_cat5_sprite->draw(900, 350);
+    p_cat6_sprite->draw(900, 600);
 }
 
 // Title Screen Unload logic
@@ -103,5 +103,6 @@ void UnloadTitleScreen(void)
 // Title Screen should finish?
 int FinishTitleScreen(void)
 {
-    return finishScreen;
+    return finish_screen;
 }
+ 

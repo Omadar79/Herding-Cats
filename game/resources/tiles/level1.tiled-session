@@ -1,0 +1,33 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "C:/Program Files/Tiled/examples/sewers.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 387.3333333333333,
+                "y": 239.66666666666663
+            }
+        },
+        "C:/Program Files/Tiled/examples/sewers.tmx#sewer_tileset": {
+            "scaleInDock": 4
+        }
+    },
+    "openFiles": [
+    ],
+    "project": "level1.tiled-project",
+    "recentFiles": [
+        "C:/Program Files/Tiled/examples/sewers.tmx"
+    ],
+    "tileset.type": 1
+}

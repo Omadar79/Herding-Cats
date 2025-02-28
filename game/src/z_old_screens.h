@@ -31,32 +31,32 @@
 //----------------------------------------------------------------------------------
 // Types and Structures Definition
 //----------------------------------------------------------------------------------
-typedef enum GameScreen 
+typedef enum game_screen : uint8_t 
 { 
 	UNKNOWN = -1, 
 	LOGO = 0,
-	TITLE, 
-	OPTIONS,
-	GAMEPLAY,
-	ENDING
+	TITLE = 1, 
+	OPTIONS = 2,
+	GAMEPLAY = 3,
+	ENDING = 4,
 
-} GameScreen;
+} Game_Screen;
 
 //----------------------------------------------------------------------------------
 // Global Variables Declaration (shared by several modules)
 //----------------------------------------------------------------------------------
-extern GameScreen currentScreen;
-extern Image logoImage;
-extern Texture2D mainTexture;
-extern Font font;
-extern Music music;
-extern Sound fxCoin;
-extern my_raylib_utils::Sprite* cat1Sprite;
-extern my_raylib_utils::Sprite* cat2Sprite;
-extern my_raylib_utils::Sprite* cat3Sprite;
-extern my_raylib_utils::Sprite* cat4Sprite;
-extern my_raylib_utils::Sprite* cat5Sprite;
-extern my_raylib_utils::Sprite* cat6Sprite;
+extern Game_Screen g_current_screen;
+extern Image g_logo_image;
+extern Texture2D g_main_texture;
+extern Font g_font;
+extern Music g_music;
+extern Sound g_fx_coin;
+extern herding_cats_game::Sprite *p_cat1_sprite;
+extern herding_cats_game::Sprite *p_cat2_sprite;
+extern herding_cats_game::Sprite *p_cat3_sprite;
+extern herding_cats_game::Sprite *p_cat4_sprite;
+extern herding_cats_game::Sprite *p_cat5_sprite;
+extern herding_cats_game::Sprite *p_cat6_sprite;
 
 
 

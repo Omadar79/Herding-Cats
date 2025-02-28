@@ -7,7 +7,7 @@
 ********************************************************************************************/
 #include "sprite.h"
 
-namespace my_raylib_utils
+namespace herding_cats_game
 {
 
     Sprite::Sprite()
@@ -79,7 +79,7 @@ namespace my_raylib_utils
         }
     }
 
-    void Sprite::setScale(float new_scale)
+    void Sprite::SetScale(float new_scale)
 	{
         _scale = new_scale;
     }

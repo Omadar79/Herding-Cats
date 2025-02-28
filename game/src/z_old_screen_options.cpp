@@ -2,7 +2,7 @@
 *
 *   raylib - Advance Game template
 *
-*   Ending Screen Functions Definitions (Init, Update, Draw, Unload)
+*   Options Screen Functions Definitions (Init, Update, Draw, Unload)
 *
 *   Copyright (c) 2014-2022 Ramon Santamaria (@raysan5)
 *
@@ -24,59 +24,47 @@
 **********************************************************************************************/
 
 #include "raylib.h"
-#include "screens.h"
+#include "z_old_screens.h"
+
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
 //----------------------------------------------------------------------------------
-static int framesCounter = 0;
-static int finishScreen = 0;
+static int frame_counter = 0;
+static int finish_screen = 0;
 
 //----------------------------------------------------------------------------------
-// Ending Screen Functions Definition
+// Options Screen Functions Definition
 //----------------------------------------------------------------------------------
 
-// Ending Screen Initialization logic
-void InitEndingScreen(void)
+// Options Screen Initialization logic
+void InitOptionsScreen(void)
 {
-    // TODO: Initialize ENDING screen variables here!
-    framesCounter = 0;
-    finishScreen = 0;
+    // TODO: Initialize OPTIONS screen variables here!
+    frame_counter = 0;
+    finish_screen = 0;
 }
 
-// Ending Screen Update logic
-void UpdateEndingScreen(void)
+// Options Screen Update logic
+void UpdateOptionsScreen(void)
 {
-    // TODO: Update ENDING screen variables here!
-
-    // Press enter or tap to return to TITLE screen
-    if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
-    {
-        finishScreen = 1;
-        PlaySound(fxCoin);
-    }
+    // TODO: Update OPTIONS screen variables here!
 }
 
-// Ending Screen Draw logic
-void DrawEndingScreen(void)
+// Options Screen Draw logic
+void DrawOptionsScreen(void)
 {
-    // TODO: Draw ENDING screen here!
-    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLUE);
-
-    Vector2 pos = { 20, 10 };
-    DrawTextEx(font, "Game Over", pos, font.baseSize * 3.0f, 4, DARKBLUE);
-    DrawText("PRESS ENTER or TAP to RETURN to Start Again", 120, 220, 20, DARKBLUE);
-
+    // TODO: Draw OPTIONS screen here!
 }
 
-// Ending Screen Unload logic
-void UnloadEndingScreen(void)
+// Options Screen Unload logic
+void UnloadOptionsScreen(void)
 {
-    // TODO: Unload ENDING screen variables here!
+    // TODO: Unload OPTIONS screen variables here!
 }
 
-// Ending Screen should finish?
-int FinishEndingScreen(void)
+// Options Screen should finish?
+int FinishOptionsScreen(void)
 {
-    return finishScreen;
+    return finish_screen;
 }

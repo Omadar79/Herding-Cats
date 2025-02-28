@@ -8,7 +8,7 @@
 
 #include "sprite_animation.h"
 
-namespace my_raylib_utils
+namespace herding_cats_game
 {
 
     SpriteAnimation::SpriteAnimation(const std::string& file_path, int frame_width, int frame_height, int num_frames, float frame_time)

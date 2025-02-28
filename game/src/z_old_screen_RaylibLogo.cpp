@@ -24,24 +24,25 @@
 **********************************************************************************************/
 
 #include "raylib.h"
-#include "screens.h"
+#include "z_old_screens.h"
+
 
 //----------------------------------------------------------------------------------
 // Module Variables Definition (local)
 //----------------------------------------------------------------------------------
-static int framesCounter = 0;
-static int finishScreen = 0;
+static int frame_counter = 0;
+static int finish_screen = 0;
 
-static int logoPositionX = 0;
-static int logoPositionY = 0;
+static int logo_position_x = 0;
+static int logo_position_y = 0;
 
-static int lettersCount = 0;
+static int letters_count = 0;
 
-static int topSideRecWidth = 0;
-static int leftSideRecHeight = 0;
+static int top_side_rect_width = 0;
+static int left_side_rect_height = 0;
 
-static int bottomSideRecWidth = 0;
-static int rightSideRecHeight = 0;
+static int bottom_side_rect_width = 0;
+static int right_side_rect_height = 0;
 
 static int state = 0;              // Logo animation states
 static float alpha = 1.0f;         // Useful for fading
@@ -53,17 +54,17 @@ static float alpha = 1.0f;         // Useful for fading
 // Logo Screen Initialization logic
 void InitLogoScreen(void)
 {
-    finishScreen = 0;
-    framesCounter = 0;
-    lettersCount = 0;
+    finish_screen = 0;
+    frame_counter = 0;
+    letters_count = 0;
 
-    logoPositionX = GetScreenWidth()/2 - 128;
-    logoPositionY = GetScreenHeight()/2 - 128;
+    logo_position_x = GetScreenWidth()/2 - 128;
+    logo_position_y = GetScreenHeight()/2 - 128;
 
-    topSideRecWidth = 16;
-    leftSideRecHeight = 16;
-    bottomSideRecWidth = 16;
-    rightSideRecHeight = 16;
+    top_side_rect_width = 16;
+    left_side_rect_height = 16;
+    bottom_side_rect_width = 16;
+    right_side_rect_height = 16;
 
     state = 0;
     alpha = 1.0f;
@@ -74,50 +75,50 @@ void UpdateLogoScreen(void)
 {
     if (state == 0)                 // State 0: Top-left square corner blink logic
     {
-        framesCounter++;
+        frame_counter++;
 
-        if (framesCounter == 80)
+        if (frame_counter == 80)
         {
             state = 1;
-            framesCounter = 0;      // Reset counter... will be used later...
+            frame_counter = 0;      // Reset counter... will be used later...
         }
     }
     else if (state == 1)            // State 1: Bars animation logic: top and left
     {
-        topSideRecWidth += 8;
-        leftSideRecHeight += 8;
+        top_side_rect_width += 8;
+        left_side_rect_height += 8;
 
-        if (topSideRecWidth == 256) state = 2;
+        if (top_side_rect_width == 256) state = 2;
     }
     else if (state == 2)            // State 2: Bars animation logic: bottom and right
     {
-        bottomSideRecWidth += 8;
-        rightSideRecHeight += 8;
+        bottom_side_rect_width += 8;
+        right_side_rect_height += 8;
 
-        if (bottomSideRecWidth == 256) state = 3;
+        if (bottom_side_rect_width == 256) state = 3;
     }
     else if (state == 3)            // State 3: "raylib" text-write animation logic
     {
-        framesCounter++;
+        frame_counter++;
 
-        if (lettersCount < 10)
+        if (letters_count < 10)
         {
-            if (framesCounter/12)   // Every 12 frames, one more letter!
+            if (frame_counter/12)   // Every 12 frames, one more letter!
             {
-                lettersCount++;
-                framesCounter = 0;
+                letters_count++;
+                frame_counter = 0;
             }
         }
         else    // When all letters have appeared, just fade out everything
         {
-            if (framesCounter > 200)
+            if (frame_counter > 200)
             {
                 alpha -= 0.02f;
 
                 if (alpha <= 0.0f)
                 {
                     alpha = 0.0f;
-                    finishScreen = 1;   // Jump to next screen
+                    finish_screen = 1;   // Jump to next screen
                 }
             }
         }
@@ -129,34 +130,34 @@ void DrawLogoScreen(void)
 {
     if (state == 0)         // Draw blinking top-left square corner
     {
-        if ((framesCounter/10)%2) DrawRectangle(logoPositionX, logoPositionY, 16, 16, BLACK);
+        if ((frame_counter/10)%2) DrawRectangle(logo_position_x, logo_position_y, 16, 16, BLACK);
     }
     else if (state == 1)    // Draw bars animation: top and left
     {
-        DrawRectangle(logoPositionX, logoPositionY, topSideRecWidth, 16, BLACK);
-        DrawRectangle(logoPositionX, logoPositionY, 16, leftSideRecHeight, BLACK);
+        DrawRectangle(logo_position_x, logo_position_y, top_side_rect_width, 16, BLACK);
+        DrawRectangle(logo_position_x, logo_position_y, 16, left_side_rect_height, BLACK);
     }
     else if (state == 2)    // Draw bars animation: bottom and right
     {
-        DrawRectangle(logoPositionX, logoPositionY, topSideRecWidth, 16, BLACK);
-        DrawRectangle(logoPositionX, logoPositionY, 16, leftSideRecHeight, BLACK);
+        DrawRectangle(logo_position_x, logo_position_y, top_side_rect_width, 16, BLACK);
+        DrawRectangle(logo_position_x, logo_position_y, 16, left_side_rect_height, BLACK);
 
-        DrawRectangle(logoPositionX + 240, logoPositionY, 16, rightSideRecHeight, BLACK);
-        DrawRectangle(logoPositionX, logoPositionY + 240, bottomSideRecWidth, 16, BLACK);
+        DrawRectangle(logo_position_x + 240, logo_position_y, 16, right_side_rect_height, BLACK);
+        DrawRectangle(logo_position_x, logo_position_y + 240, bottom_side_rect_width, 16, BLACK);
     }
     else if (state == 3)    // Draw "raylib" text-write animation + "powered by"
     {
-        DrawRectangle(logoPositionX, logoPositionY, topSideRecWidth, 16, Fade(BLACK, alpha));
-        DrawRectangle(logoPositionX, logoPositionY + 16, 16, leftSideRecHeight - 32, Fade(BLACK, alpha));
+        DrawRectangle(logo_position_x, logo_position_y, top_side_rect_width, 16, Fade(BLACK, alpha));
+        DrawRectangle(logo_position_x, logo_position_y + 16, 16, left_side_rect_height - 32, Fade(BLACK, alpha));
 
-        DrawRectangle(logoPositionX + 240, logoPositionY + 16, 16, rightSideRecHeight - 32, Fade(BLACK, alpha));
-        DrawRectangle(logoPositionX, logoPositionY + 240, bottomSideRecWidth, 16, Fade(BLACK, alpha));
+        DrawRectangle(logo_position_x + 240, logo_position_y + 16, 16, right_side_rect_height - 32, Fade(BLACK, alpha));
+        DrawRectangle(logo_position_x, logo_position_y + 240, bottom_side_rect_width, 16, Fade(BLACK, alpha));
 
         DrawRectangle(GetScreenWidth()/2 - 112, GetScreenHeight()/2 - 112, 224, 224, Fade(RAYWHITE, alpha));
 
-        DrawText(TextSubtext("raylib", 0, lettersCount), GetScreenWidth()/2 - 44, GetScreenHeight()/2 + 48, 50, Fade(BLACK, alpha));
+        DrawText(TextSubtext("raylib", 0, letters_count), GetScreenWidth()/2 - 44, GetScreenHeight()/2 + 48, 50, Fade(BLACK, alpha));
 
-        if (framesCounter > 20) DrawText("powered by", logoPositionX, logoPositionY - 27, 20, Fade(DARKGRAY, alpha));
+        if (frame_counter > 20) DrawText("powered by", logo_position_x, logo_position_y - 27, 20, Fade(DARKGRAY, alpha));
     }
 }
 
@@ -169,5 +170,5 @@ void UnloadLogoScreen(void)
 // Logo Screen should finish?
 int FinishLogoScreen(void)
 {
-    return finishScreen;
+    return finish_screen;
 }

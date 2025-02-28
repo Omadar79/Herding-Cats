@@ -4,7 +4,7 @@
 #include <string>
 #include "raylib.h"
 
-namespace my_raylib_utils
+namespace herding_cats_game
 {
     struct SpriteAnimation
     {
