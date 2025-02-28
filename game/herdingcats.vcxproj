@@ -267,28 +267,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ai_controller.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="scene.h" />
-    <ClInclude Include="scene_ending.h" />
-    <ClInclude Include="scene_gameplay.h" />
-    <ClInclude Include="scene_logo.h" />
-    <ClInclude Include="scene_manager.h" />
-    <ClInclude Include="scene_options.h" />
+    <ClInclude Include="src\ai_controller.h" />
+    <ClInclude Include="src\game.h" />
+    <ClInclude Include="src\scene.h" />
+    <ClInclude Include="src\scene_ending.h" />
+    <ClInclude Include="src\scene_gameplay.h" />
+    <ClInclude Include="src\scene_logo.h" />
+    <ClInclude Include="src\scene_manager.h" />
+    <ClInclude Include="src\scene_options.h" />
     <ClInclude Include="src\sprite_move_controller.h" />
     <ClInclude Include="src\sprite.h" />
     <ClInclude Include="src\sprite_animation.h" />
     <ClInclude Include="src\utilities.h" />
-    <ClInclude Include="scene_title.h" />
+    <ClInclude Include="src\scene_title.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ai_controller.cpp" />
-    <ClCompile Include="scene_ending.cpp" />
-    <ClCompile Include="scene_gameplay.cpp" />
-    <ClCompile Include="scene_logo.cpp" />
-    <ClCompile Include="scene_manager.cpp" />
-    <ClCompile Include="scene_options.cpp" />
-    <ClCompile Include="scene_title.cpp" />
+    <ClCompile Include="src\ai_controller.cpp" />
+    <ClCompile Include="src\scene_ending.cpp" />
+    <ClCompile Include="src\scene_gameplay.cpp" />
+    <ClCompile Include="src\scene_logo.cpp" />
+    <ClCompile Include="src\scene_manager.cpp" />
+    <ClCompile Include="src\scene_options.cpp" />
+    <ClCompile Include="src\scene_title.cpp" />
     <ClCompile Include="src\sprite_move_controller.cpp" />
     <ClCompile Include="src\game_main.cpp" />
     <ClCompile Include="src\sprite.cpp" />

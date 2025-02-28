@@ -16,25 +16,25 @@
     <ClCompile Include="src\utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ai_controller.cpp">
+    <ClCompile Include="src\ai_controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scene_manager.cpp">
+    <ClCompile Include="src\scene_ending.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scene_title.cpp">
+    <ClCompile Include="src\scene_gameplay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scene_ending.cpp">
+    <ClCompile Include="src\scene_logo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scene_logo.cpp">
+    <ClCompile Include="src\scene_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scene_options.cpp">
+    <ClCompile Include="src\scene_options.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scene_gameplay.cpp">
+    <ClCompile Include="src\scene_title.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -51,31 +51,31 @@
     <ClInclude Include="src\utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ai_controller.h">
+    <ClInclude Include="src\game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scene.h">
+    <ClInclude Include="src\ai_controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scene_title.h">
+    <ClInclude Include="src\scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game.h">
+    <ClInclude Include="src\scene_ending.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scene_manager.h">
+    <ClInclude Include="src\scene_gameplay.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scene_logo.h">
+    <ClInclude Include="src\scene_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scene_gameplay.h">
+    <ClInclude Include="src\scene_logo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scene_options.h">
+    <ClInclude Include="src\scene_options.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scene_ending.h">
+    <ClInclude Include="src\scene_title.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
