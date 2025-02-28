@@ -2,7 +2,7 @@
 #include "game.h"
 
 
-namespace herding_cats_game
+namespace hcg
 {
 	void SceneEnding::Init()
 	{
@@ -13,7 +13,7 @@ namespace herding_cats_game
 	void SceneEnding::Update()
 	{
 		// TODO: Update ENDING screen variables here!
-
+		UpdateMusicStream(g_music);
 		 // Press enter or tap to return to TITLE screen
 		if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
 		{
@@ -39,5 +39,10 @@ namespace herding_cats_game
 	bool SceneEnding::Finish()
 	{
 		return _finishScreen;
+	}
+
+	scene_type SceneEnding::GetSceneType()
+	{
+		return scene_type::ENDING;
 	}
 }

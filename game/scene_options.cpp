@@ -1,7 +1,7 @@
 #include "scene_options.h"
 #include "game.h"
 
-namespace herding_cats_game
+namespace hcg
 {
     void SceneOptions::Init()
     {
@@ -11,6 +11,7 @@ namespace herding_cats_game
 
     void SceneOptions::Update()
     {
+		UpdateMusicStream(g_music);
     }
 
     void SceneOptions::Draw()
@@ -24,5 +25,10 @@ namespace herding_cats_game
 	bool SceneOptions::Finish()
 	{
 		return _finishScreen;
+	}
+
+	scene_type SceneOptions::GetSceneType()
+	{
+		return scene_type::OPTIONS;
 	}
 }

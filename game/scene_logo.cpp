@@ -1,7 +1,7 @@
 #include "scene_logo.h"
 #include "game.h"
 
-namespace herding_cats_game
+namespace hcg
 {
 	void SceneLogo::Init()
 	{
@@ -89,7 +89,10 @@ namespace herding_cats_game
 	
         if (_state == 0)         // Draw blinking top-left square corner
         {
-            if ((_frameCounter / 10) % 2) DrawRectangle(_logoPositionX, _logoPositionY, 16, 16, BLACK);
+            if ((_frameCounter / 10) % 2)
+            {
+                DrawRectangle(_logoPositionX, _logoPositionY, 16, 16, BLACK);
+            }
         }
         else if (_state == 1)    // Draw bars animation: top and left
         {
@@ -116,7 +119,10 @@ namespace herding_cats_game
 
             DrawText(TextSubtext("raylib", 0, _lettersCount), GetScreenWidth() / 2 - 44, GetScreenHeight() / 2 + 48, 50, Fade(BLACK, _alpha));
 
-            if (_frameCounter > 20) DrawText("powered by", _logoPositionX, _logoPositionY - 27, 20, Fade(DARKGRAY, _alpha));
+            if (_frameCounter > 20)
+            {
+                DrawText("powered by", _logoPositionX, _logoPositionY - 27, 20, Fade(DARKGRAY, _alpha));
+            }
         }
 	}
 
@@ -128,4 +134,9 @@ namespace herding_cats_game
 	{
 		return _finishScreen;
 	}
+
+    scene_type SceneLogo::GetSceneType()
+	{
+        return scene_type::LOGO;
+    }
 }

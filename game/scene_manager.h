@@ -4,7 +4,7 @@
 #include "scene.h"
 #include <memory>
 
-namespace herding_cats_game
+namespace hcg
 {
     class SceneManager
 	{
@@ -13,6 +13,7 @@ namespace herding_cats_game
         void TransitionToScene(std::unique_ptr<Scene> newScene, bool withTransition = true);
         void Update();
         void Draw();
+		void Cleanup();
 
     private:
 

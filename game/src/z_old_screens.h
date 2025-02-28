@@ -51,12 +51,12 @@ extern Texture2D g_main_texture;
 extern Font g_font;
 extern Music g_music;
 extern Sound g_fx_coin;
-extern herding_cats_game::Sprite *p_cat1_sprite;
-extern herding_cats_game::Sprite *p_cat2_sprite;
-extern herding_cats_game::Sprite *p_cat3_sprite;
-extern herding_cats_game::Sprite *p_cat4_sprite;
-extern herding_cats_game::Sprite *p_cat5_sprite;
-extern herding_cats_game::Sprite *p_cat6_sprite;
+extern hcg::Sprite *p_cat1_sprite;
+extern hcg::Sprite *p_cat2_sprite;
+extern hcg::Sprite *p_cat3_sprite;
+extern hcg::Sprite *p_cat4_sprite;
+extern hcg::Sprite *p_cat5_sprite;
+extern hcg::Sprite *p_cat6_sprite;
 
 
 

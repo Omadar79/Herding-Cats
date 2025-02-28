@@ -1,7 +1,7 @@
 #include "ai_controller.h"
 
 
-namespace herding_cats_game
+namespace hcg
 {
     AIController::AIController(SpriteMoveController& character) : _character(character) {}
 

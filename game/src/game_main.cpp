@@ -11,48 +11,33 @@
 ********************************************************************************************/
 
 #include "raylib.h"
-#include "game.h"    // NOTE: Declares global (extern) variables and screens functions
+#include "game.h"    // NOTE: Declares global (extern) variables
 #include "sprite.h"
 #include "scene_manager.h"
 #include "scene_title.h"
+#include "scene_logo.h"
 
 
 //----------------------------------------------------------------------------------
-// global variables shared between modules through screens.h
-//Game_Screen g_current_screen = TITLE;
+// global variables shared between modules through game.h
 Image g_logo_image;
 Texture2D g_main_texture;
 Font g_font = { 0 };
 Music g_music = { 0 };
 Sound g_fx_coin = { 0 };
-herding_cats_game::Sprite *p_cat1_sprite = nullptr;
-herding_cats_game::Sprite *p_cat2_sprite = nullptr;
-herding_cats_game::Sprite *p_cat3_sprite = nullptr;
-herding_cats_game::Sprite *p_cat4_sprite = nullptr;
-herding_cats_game::Sprite *p_cat5_sprite = nullptr;
-herding_cats_game::Sprite *p_cat6_sprite = nullptr;
-
+hcg::Sprite *p_cat1_sprite = nullptr;
+hcg::Sprite *p_cat2_sprite = nullptr;
+hcg::Sprite *p_cat3_sprite = nullptr;
+hcg::Sprite *p_cat4_sprite = nullptr;
+hcg::Sprite *p_cat5_sprite = nullptr;
+hcg::Sprite *p_cat6_sprite = nullptr;
+hcg::SceneManager SceneManager;
 
 //------------------------------------------------------------------------------
 // local variables
 static constexpr int screen_width = 1024;
 static constexpr int screen_height = 768;
 
-// Required variables to manage screen transitions (fade-in, fade-out)
-// static float transition_alpha = 0.0f;
-// static bool transition_enabled = false;
-// static bool transition_fade_out = false;
-// static int transition_from_screen = -1;
-// static Game_Screen transition_to_screen = UNKNOWN;
-
-//----------------------------------------------------------------------------------
-// local functions
-// static void TransitionToScreen(Game_Screen current_screen, Game_Screen new_screen); // Request transition to next screen
-// static void UpdateTransition(void); // update transition effect
-// static void DrawTransition(void); // draw transition effect (full-screen rectangle)
-// static void GameLoop(void); // main loop called every frame
-// static void UpdateCurrentScreen(void); // Update current screen (logic)
-// static void DrawCurrentScreen (void); // Draw current screen (graphics)
 static void InitializeGame(void); // Initialize game variables
 static void InitializeAssets(void); // Initialize files and load assets
 static void UnloadGame(void); // Unload current screen and free resources
@@ -66,8 +51,11 @@ int main(void)
 
 	InitializeGame();
 
-	herding_cats_game::SceneManager SceneManager;
-	SceneManager.SetScene(std::make_unique<herding_cats_game::SceneTitle>());
+#ifdef GAMETESTING
+	SceneManager.SetScene(std::make_unique<hcg::SceneTitle>());
+#else
+	SceneManager.SetScene(std::make_unique<hcg::SceneLogo>());
+#endif
 
 
 	SetTargetFPS(60); // Set our game to run at 60 frames-per-second
@@ -75,8 +63,8 @@ int main(void)
 	// Main game loop
 	while (!WindowShouldClose()) // Detect window close button or ESC key
 	{
-		//GameLoop();
-		SceneManager.Update();
+		// the game loop logic depends on which scene we are in
+		SceneManager.Update(); 
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
 		SceneManager.Draw();
@@ -97,10 +85,6 @@ void InitializeGame(void)
 
 	SetMusicVolume(g_music, 1.0f);
 	PlayMusicStream(g_music);
-
-	// Setup and init first screen
-	g_current_screen = TITLE;
-	InitTitleScreen();
 }
 
 // Asset Initialization
@@ -118,7 +102,7 @@ void InitializeAssets(void)
 
 	g_main_texture = LoadTextureFromImage(g_logo_image);
 	// Create a sprite object
-	p_cat1_sprite = new herding_cats_game::Sprite(3);
+	p_cat1_sprite = new hcg::Sprite(3);
 	p_cat1_sprite->addAnimation("idle", "resources/sprites/Cat-1-Idle.png", 50, 50, 10, idleFrameTime);
 	p_cat1_sprite->addAnimation("itch", "resources/sprites/Cat-1-Itch.png", 50, 50, 2, itchFrameTime);
 	p_cat1_sprite->addAnimation("laying", "resources/sprites/Cat-1-Laying.png", 50, 50, 8, 0.1f);
@@ -133,7 +117,7 @@ void InitializeAssets(void)
 	p_cat1_sprite->addAnimation("sleeping2", "resources/sprites/Cat-1-Sleeping2.png", 50, 50, 1, 0.1f);
 	p_cat1_sprite->setAnimation("idle");
 
-	p_cat2_sprite = new herding_cats_game::Sprite(3);
+	p_cat2_sprite = new hcg::Sprite(3);
 	p_cat2_sprite->addAnimation("idle", "resources/sprites/Cat-2-Idle.png", 50, 50, 10, idleFrameTime);
 	p_cat2_sprite->addAnimation("itch", "resources/sprites/Cat-2-Itch.png", 50, 50, 2, itchFrameTime);
 	p_cat2_sprite->addAnimation("laying", "resources/sprites/Cat-2-Laying.png", 50, 50, 8, 0.1f);
@@ -148,7 +132,7 @@ void InitializeAssets(void)
 	p_cat2_sprite->addAnimation("sleeping2", "resources/sprites/Cat-2-Sleeping2.png", 50, 50, 1, 0.1f);
 	p_cat2_sprite->setAnimation("itch");
 
-	p_cat3_sprite = new herding_cats_game::Sprite(3);
+	p_cat3_sprite = new hcg::Sprite(3);
 	p_cat3_sprite->addAnimation("idle", "resources/sprites/Cat-3-Idle.png", 50, 50, 10, idleFrameTime);
 	p_cat3_sprite->addAnimation("itch", "resources/sprites/Cat-3-Itch.png", 50, 50, 2, itchFrameTime);
 	p_cat3_sprite->addAnimation("laying", "resources/sprites/Cat-3-Laying.png", 50, 50, 8, 0.1f);
@@ -163,7 +147,7 @@ void InitializeAssets(void)
 	p_cat3_sprite->addAnimation("sleeping2", "resources/sprites/Cat-3-Sleeping2.png", 50, 50, 1, 0.1f);
 	p_cat3_sprite->setAnimation("walk");
 
-	p_cat4_sprite = new herding_cats_game::Sprite(3);
+	p_cat4_sprite = new hcg::Sprite(3);
 	p_cat4_sprite->addAnimation("idle", "resources/sprites/Cat-4-Idle.png", 50, 50, 10, idleFrameTime);
 	p_cat4_sprite->addAnimation("itch", "resources/sprites/Cat-4-Itch.png", 50, 50, 2, itchFrameTime);
 	p_cat4_sprite->addAnimation("laying", "resources/sprites/Cat-4-Laying.png", 50, 50, 8, 0.1f);
@@ -178,7 +162,7 @@ void InitializeAssets(void)
 	p_cat4_sprite->addAnimation("sleeping2", "resources/sprites/Cat-4-Sleeping2.png", 50, 50, 1, 0.1f);
 	p_cat4_sprite->setAnimation("lickingButt");
 
-	p_cat5_sprite = new herding_cats_game::Sprite(3);
+	p_cat5_sprite = new hcg::Sprite(3);
 	p_cat5_sprite->addAnimation("idle", "resources/sprites/Cat-5-Idle.png", 50, 50, 10, idleFrameTime);
 	p_cat5_sprite->addAnimation("itch", "resources/sprites/Cat-5-Itch.png", 50, 50, 2, itchFrameTime);
 	p_cat5_sprite->addAnimation("laying", "resources/sprites/Cat-5-Laying.png", 50, 50, 8, 0.1f);
@@ -193,7 +177,7 @@ void InitializeAssets(void)
 	p_cat5_sprite->addAnimation("sleeping2", "resources/sprites/Cat-5-Sleeping2.png", 50, 50, 1, 0.1f);
 	p_cat5_sprite->setAnimation("run");
 
-	p_cat6_sprite = new herding_cats_game::Sprite(3);
+	p_cat6_sprite = new hcg::Sprite(3);
 	p_cat6_sprite->addAnimation("idle", "resources/sprites/Cat-6-Idle.png", 50, 50, 10, idleFrameTime);
 	p_cat6_sprite->addAnimation("itch", "resources/sprites/Cat-6-Itch.png", 50, 50, 2, itchFrameTime);
 	p_cat6_sprite->addAnimation("laying", "resources/sprites/Cat-6-Laying.png", 50, 50, 8, 0.1f);
@@ -212,28 +196,6 @@ void InitializeAssets(void)
 // De-Initialization and unload current screen data before closing
 void UnloadGame(void)
 {
-	switch (g_current_screen)
-	{
-	case LOGO:
-		UnloadLogoScreen();
-		break;
-
-	case TITLE:
-		UnloadTitleScreen();
-		break;
-
-	case GAMEPLAY:
-		UnloadGameplayScreen();
-		break;
-
-	case ENDING:
-		UnloadEndingScreen();
-		break;
-
-	default:
-		break;
-	}
-
 	//------ Unload global data
 	UnloadFont(g_font);
 	UnloadMusicStream(g_music);
@@ -259,267 +221,3 @@ void CleanUpObjects()
 	delete p_cat5_sprite;
 	delete p_cat6_sprite;
 }
-
-// Change to next screen, no transition
-// void ChangeToScreen(Game_Screen old_screen, Game_Screen new_screen)
-// {
-// 	// Unload current screen
-// 	switch (old_screen)
-// 	{
-// 		case LOGO:
-// 			UnloadLogoScreen();
-// 			break;
-//
-// 		case TITLE:
-// 			UnloadTitleScreen();
-// 			break;
-//
-// 		case GAMEPLAY:
-// 			UnloadGameplayScreen();
-// 			break;
-//
-// 		case ENDING:
-// 			UnloadEndingScreen();
-// 			break;
-//
-// 		default:
-// 			break;
-// 	}
-//
-// 	// Init next screen
-// 	switch (new_screen)
-// 	{
-// 		case LOGO:
-// 			InitLogoScreen();
-// 			break;
-//
-// 		case TITLE:
-// 			InitTitleScreen();
-// 			break;
-//
-// 		case GAMEPLAY:
-// 			InitGameplayScreen();
-// 			break;
-//
-// 		case ENDING:
-// 			InitEndingScreen();
-// 			break;
-//
-// 		default:
-// 			break;
-// 	}
-//
-// 	g_current_screen = new_screen;
-// }
-//
-// // Request transition to next screen
-// void TransitionToScreen(Game_Screen current_screen, Game_Screen new_screen)
-// {
-// 	transition_enabled = true;
-// 	transition_fade_out = false;
-// 	transition_from_screen = current_screen;
-// 	transition_to_screen = new_screen;
-// 	transition_alpha = 0.0f;
-// 	g_current_screen = new_screen;
-// }
-//
-// // update transition effect (fade-in, fade-out)
-// void UpdateTransition(void)
-// {
-// 	if (!transition_fade_out)
-// 	{
-// 		transition_alpha += 0.05f;
-//
-// 		// NOTE: Due to float internal representation, condition jumps on 1.0f instead of 1.05f
-// 		// For that reason we compare against 1.01f, to avoid last frame loading stop
-// 		if (transition_alpha > 1.01f)
-// 		{
-// 			transition_alpha = 1.0f;
-//
-// 			// Unload current screen
-// 			switch (transition_from_screen)
-// 			{
-// 				case LOGO:
-// 					UnloadLogoScreen();
-// 					break;
-//
-// 				case TITLE:
-// 					UnloadTitleScreen();
-// 					break;
-//
-// 				case OPTIONS:
-// 					UnloadOptionsScreen();
-// 					break;
-//
-// 				case GAMEPLAY:
-// 					UnloadGameplayScreen();
-// 					break;
-//
-// 				case ENDING:
-// 					UnloadEndingScreen();
-// 					break;
-//
-// 				default:
-// 					break;
-// 			}
-//
-// 			// Load next screen
-// 			switch (transition_to_screen)
-// 			{
-// 			case LOGO:
-// 				InitLogoScreen();
-// 				break;
-//
-// 			case TITLE:
-// 				InitTitleScreen();
-// 				break;
-//
-// 			case GAMEPLAY:
-// 				InitGameplayScreen();
-// 				break;
-//
-// 			case ENDING:
-// 				InitEndingScreen();
-// 				break;
-//
-// 			default:
-// 				break;
-// 			}
-//
-// 			g_current_screen = transition_to_screen;
-//
-// 			// Activate fade out effect to next loaded screen
-// 			transition_fade_out = true;
-// 		}
-// 	}
-// 	else // Transition fade out logic
-// 	{
-// 		transition_alpha -= 0.02f;
-//
-// 		if (transition_alpha < -0.01f)
-// 		{
-// 			transition_alpha = 0.0f;
-// 			transition_fade_out = false;
-// 			transition_enabled = false;
-// 			transition_from_screen = -1;
-// 			transition_to_screen = UNKNOWN;
-// 		}
-// 	}
-// }
-//
-// // draw transition effect (full-screen rectangle)
-// void DrawTransition(void)
-// {
-// 	DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, transition_alpha));
-// }
-//
-// // update the current screen and transition if necessary
-// void UpdateCurrentScreen(Game_Screen current_screen)
-// {
-//     switch (current_screen)
-//     {
-//         case LOGO:
-//             UpdateLogoScreen();
-//             if (FinishLogoScreen())
-//             {
-//                 TransitionToScreen(current_screen,TITLE);
-//             }
-//             break;
-//         case TITLE:
-//             UpdateTitleScreen();
-//             if (FinishTitleScreen() == 1)
-//             {
-//                 TransitionToScreen(current_screen, OPTIONS);
-//             }
-//             else if (FinishTitleScreen() == 2)
-//             {
-//                 TransitionToScreen(current_screen, GAMEPLAY);
-//             }
-//             break;
-//         case OPTIONS:
-//             UpdateOptionsScreen();
-//             if (FinishOptionsScreen())
-//             {
-//                 TransitionToScreen(current_screen, TITLE);
-//             }
-//             break;
-//         case GAMEPLAY:
-//             UpdateGameplayScreen();
-//             if (FinishGameplayScreen() == 1)
-//             {
-//                 TransitionToScreen(current_screen,ENDING);
-//             }
-//             break;
-//         case ENDING:
-//             UpdateEndingScreen();
-//             if (FinishEndingScreen() == 1)
-//             {
-//                 TransitionToScreen(current_screen,TITLE);
-//             }
-//             break;
-//         default:
-//             break;
-//     }
-// }
-//
-// // Draw the current screen
-// void DrawCurrentScreen(Game_Screen current_screen)
-// {
-// 	switch (current_screen)
-// 	{
-// 		case LOGO:
-// 			DrawLogoScreen();
-// 			break;
-// 		case TITLE:
-// 			DrawTitleScreen();
-// 			break;
-// 		case OPTIONS:
-// 			DrawOptionsScreen();
-// 			break;
-// 		case GAMEPLAY:
-// 			DrawGameplayScreen();
-// 			break;
-// 		case ENDING:
-// 			DrawEndingScreen();
-// 			break;
-// 		default:
-// 			break;
-// 	}
-// }
-//
-// // Main game loop
-// void GameLoop(void)
-// {
-// 	// Music keeps playing between screens
-//     UpdateMusicStream(g_music);
-//
-//     // Make sure we are not in screen transition
-//     if (!transition_enabled)
-//     {
-// 		UpdateCurrentScreen(g_current_screen);
-//     }
-//     else // if we are in screen transition lets update it
-//     {
-//         UpdateTransition();
-//     }
-//
-//     //-------------------
-//     // Main draw Routine
-//     //-------------------
-// 	BeginDrawing();  
-//
-//     ClearBackground(RAYWHITE);
-//
-// 	DrawCurrentScreen(g_current_screen);
-//
-// 	//if needed draw transition effect
-//     if (transition_enabled)
-//     {
-//         DrawTransition();
-//     }
-//
-//     EndDrawing();
-//     //----------------------------------------------------------------------------------
-//
-// }
-

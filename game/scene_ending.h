@@ -2,7 +2,7 @@
 #define SCENE_ENDING_H
 #include "scene.h"
 
-namespace herding_cats_game
+namespace hcg
 {
 	class SceneEnding : public Scene
 	{
@@ -12,7 +12,7 @@ namespace herding_cats_game
 		void Draw() override;
 		void Unload() override;
 		bool Finish() override;
-
+		scene_type GetSceneType() override;
 	private:
 		int _frameCounter = 0;
 		bool _finishScreen = false;

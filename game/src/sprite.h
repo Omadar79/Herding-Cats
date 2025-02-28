@@ -1,3 +1,11 @@
+/*******************************************************************************************
+*
+*   File Description: The Sprite class encapsulates sprite drawing and animation classes
+*
+*   Programming: Dustin Taub
+*
+********************************************************************************************/
+
 #ifndef SPRITE_H
 #define SPRITE_H
 
@@ -5,7 +13,7 @@
 #include <unordered_map>
 #include "sprite_animation.h"
 
-namespace herding_cats_game
+namespace hcg
 {
     class Sprite
     {

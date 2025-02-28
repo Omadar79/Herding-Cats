@@ -1,3 +1,11 @@
+/*******************************************************************************************
+*
+*   File Description: The Sprite Move Controller helps manage a sprite's movement on the screen
+*
+*   Programming: Dustin Taub
+*
+********************************************************************************************/
+
 #ifndef CHARACTERCONTROLLER_H
 #define CHARACTERCONTROLLER_H
 
@@ -5,7 +13,7 @@
 #include "Sprite.h"
 
 
-namespace herding_cats_game
+namespace hcg
 {
     class SpriteMoveController
 	{

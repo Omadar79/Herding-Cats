@@ -276,7 +276,6 @@
     <ClInclude Include="scene_manager.h" />
     <ClInclude Include="scene_options.h" />
     <ClInclude Include="src\sprite_move_controller.h" />
-    <ClInclude Include="src\z_old_screens.h" />
     <ClInclude Include="src\sprite.h" />
     <ClInclude Include="src\sprite_animation.h" />
     <ClInclude Include="src\utilities.h" />
@@ -292,11 +291,6 @@
     <ClCompile Include="scene_title.cpp" />
     <ClCompile Include="src\sprite_move_controller.cpp" />
     <ClCompile Include="src\game_main.cpp" />
-    <ClCompile Include="src\z_old_screen_ending.cpp" />
-    <ClCompile Include="src\z_old_screen_gameplay.cpp" />
-    <ClCompile Include="src\z_old_screen_RaylibLogo.cpp" />
-    <ClCompile Include="src\z_old_screen_options.cpp" />
-    <ClCompile Include="src\z_old_screen_title.cpp" />
     <ClCompile Include="src\sprite.cpp" />
     <ClCompile Include="src\sprite_animation.cpp" />
     <ClCompile Include="src\utilities.cpp" />

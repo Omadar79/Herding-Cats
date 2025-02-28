@@ -1,7 +1,7 @@
 #include "scene_title.h"
 #include "game.h"
 
-namespace herding_cats_game
+namespace hcg
 {
     void SceneTitle::Init()
     {
@@ -17,12 +17,12 @@ namespace herding_cats_game
 
     void SceneTitle::Update()
     {
+        UpdateMusicStream(g_music);
         // Press enter or tap to change to GAMEPLAY screen
         if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
         {
-            //finishScreen = 1;   // OPTIONS
-            //finishScreen = 2;   // GAMEPLAY
-            //PlaySound(fxCoin);
+            PlaySound(g_fx_coin);
+            _finishScreen = true;
         }
         p_cat1_sprite->update(GetFrameTime());
         p_cat2_sprite->update(GetFrameTime());
@@ -63,5 +63,10 @@ namespace herding_cats_game
     bool SceneTitle::Finish()
     {
         return _finishScreen;
+    }
+
+    scene_type SceneTitle::GetSceneType()
+    {
+        return scene_type::TITLE;
     }
 }

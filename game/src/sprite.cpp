@@ -7,7 +7,7 @@
 ********************************************************************************************/
 #include "sprite.h"
 
-namespace herding_cats_game
+namespace hcg
 {
 
     Sprite::Sprite()

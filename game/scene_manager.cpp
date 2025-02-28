@@ -1,7 +1,12 @@
 #include "scene_manager.h"
 #include "raylib.h"
+#include "scene_ending.h"
+#include "scene_gameplay.h"
+#include "scene_logo.h"
+#include "scene_options.h"
+#include "scene_title.h"
 
-namespace herding_cats_game
+namespace hcg
 {
 
     void SceneManager::SetScene(std::unique_ptr<Scene> newScene)
@@ -43,7 +48,24 @@ namespace herding_cats_game
             currentScene->Update();
             if (currentScene->Finish())
             {
-                // Handle scene transition logic here
+                switch (currentScene->GetSceneType())
+            	{
+                case scene_type::LOGO:
+                    TransitionToScene(std::make_unique<SceneTitle>());
+                    break;
+                case scene_type::TITLE:
+                    TransitionToScene(std::make_unique<SceneGameplay>());
+                    break;
+                case scene_type::OPTIONS:
+                    TransitionToScene(std::make_unique<SceneOptions>());
+                    break;
+                case scene_type::GAMEPLAY:
+                    TransitionToScene(std::make_unique<SceneEnding>());
+                    break;
+                case scene_type::ENDING:
+                    TransitionToScene(std::make_unique<SceneTitle>());
+                    break;
+                }
             }
         }
     }
@@ -91,8 +113,23 @@ namespace herding_cats_game
         }
     }
 
+    
+
+
     void SceneManager::DrawTransition()
 	{
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, transitionAlpha));
     }
+
+    void SceneManager::Cleanup() {
+        if (currentScene) {
+            currentScene->Unload();
+            currentScene.reset();
+        }
+        if (nextScene) {
+            nextScene->Unload();
+            nextScene.reset();
+        }
+    }
+	
 }

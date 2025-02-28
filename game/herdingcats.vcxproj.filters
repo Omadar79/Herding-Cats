@@ -7,21 +7,6 @@
     <ClCompile Include="src\game_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\z_old_screen_ending.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\z_old_screen_gameplay.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\z_old_screen_options.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\z_old_screen_RaylibLogo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\z_old_screen_title.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -55,9 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\sprite_move_controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\z_old_screens.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\sprite.h">

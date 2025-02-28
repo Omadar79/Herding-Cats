@@ -1,10 +1,18 @@
+/*******************************************************************************************
+*
+*   File Description: The Sprite Animation struct encapsulates the animation data for a sprite
+*
+*   Programming: Dustin Taub
+*
+********************************************************************************************/
+
 #ifndef SPRITEANIMATION_H
 #define SPRITEANIMATION_H
 
 #include <string>
 #include "raylib.h"
 
-namespace herding_cats_game
+namespace hcg
 {
     struct SpriteAnimation
     {

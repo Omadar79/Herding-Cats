@@ -8,7 +8,7 @@
 
 #include "sprite_animation.h"
 
-namespace herding_cats_game
+namespace hcg
 {
 
     SpriteAnimation::SpriteAnimation(const std::string& file_path, int frame_width, int frame_height, int num_frames, float frame_time)
