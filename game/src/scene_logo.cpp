@@ -6,7 +6,8 @@ namespace hcg
 	void SceneLogo::Init()
 	{
 		_frameCounter = 0;
-		_finishScreen = false;
+        _transitionScreen = scene_type::NONE;
+        _sceneFinished = false;
 
 
 		_logoPositionX = GetScreenWidth() / 2 - 128;
@@ -77,7 +78,8 @@ namespace hcg
                     if (_alpha <= 0.0f)
                     {
                         _alpha = 0.0f;
-                        _finishScreen = 1;   // Jump to next screen
+                        _transitionScreen = scene_type::TITLE;
+                        _sceneFinished = true;
                     }
                 }
             }
@@ -130,9 +132,14 @@ namespace hcg
 	{
 	}
 
-	bool SceneLogo::Finish()
+    bool SceneLogo::IsSceneFinished()
+    {
+        return _sceneFinished;
+    }
+
+	scene_type SceneLogo::GetTransitionSceneType()
 	{
-		return _finishScreen;
+        return _transitionScreen;
 	}
 
     scene_type SceneLogo::GetSceneType()

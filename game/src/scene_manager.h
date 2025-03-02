@@ -11,14 +11,14 @@ namespace hcg
     public:
         void SetScene(std::unique_ptr<Scene> newScene);
         void TransitionToScene(std::unique_ptr<Scene> newScene, bool withTransition = true);
-        void Update();
-        void Draw();
+        void UpdateFrame();
+        void DrawFrame() const;
 		void Cleanup();
 
     private:
 
         void UpdateTransition();
-        void DrawTransition();
+        void DrawTransition() const;
 
 		std::unique_ptr<Scene> currentScene;
         std::unique_ptr<Scene> nextScene;

@@ -12,18 +12,26 @@ namespace hcg
         p_cat5_sprite->setFlipHorizontal(true);
         p_cat6_sprite->setFlipHorizontal(true);
         _frameCounter = 0;
-        _finishScreen = false;
+        _transitionScreen = scene_type::NONE;
+        _sceneFinished = false;
+
+
+        
+       
     }
 
     void SceneTitle::Update()
     {
         UpdateMusicStream(g_music);
-        // Press enter or tap to change to GAMEPLAY screen
+
+    	//  ---------------------- Check Input ----------------------
         if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
         {
             PlaySound(g_fx_coin);
-            _finishScreen = true;
+            _sceneFinished = true;
+            _transitionScreen = scene_type::GAMEPLAY;
         }
+
         p_cat1_sprite->update(GetFrameTime());
         p_cat2_sprite->update(GetFrameTime());
         p_cat3_sprite->update(GetFrameTime());
@@ -60,9 +68,14 @@ namespace hcg
         // Unload resources specific to the gameplay screen
     }
 
-    bool SceneTitle::Finish()
+    bool SceneTitle::IsSceneFinished()
     {
-        return _finishScreen;
+        return _sceneFinished;
+    }
+
+    scene_type SceneTitle::GetTransitionSceneType()
+    {
+        return _transitionScreen;
     }
 
     scene_type SceneTitle::GetSceneType()

@@ -7,17 +7,20 @@ namespace hcg
 	void SceneEnding::Init()
 	{
 		_frameCounter = 0;
-		_finishScreen = false;
+		_transitionScreen = scene_type::NONE;
+		_sceneFinished = false;
 	}
 
 	void SceneEnding::Update()
 	{
-		// TODO: Update ENDING screen variables here!
+
 		UpdateMusicStream(g_music);
+
 		 // Press enter or tap to return to TITLE screen
 		if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
 		{
-			_finishScreen = 1;
+			_sceneFinished = true;
+			_transitionScreen = scene_type::TITLE;
 			PlaySound(g_fx_coin);
 		}
 	}
@@ -36,9 +39,14 @@ namespace hcg
 	{
 	}
 
-	bool SceneEnding::Finish()
+	bool SceneEnding::IsSceneFinished()
 	{
-		return _finishScreen;
+		return _sceneFinished;
+	}
+
+	scene_type SceneEnding::GetTransitionSceneType()
+	{
+		return _transitionScreen;
 	}
 
 	scene_type SceneEnding::GetSceneType()

@@ -6,12 +6,21 @@ namespace hcg
     void SceneOptions::Init()
     {
 		_frameCounter = 0;
-		_finishScreen = false;
+		_transitionScreen = scene_type::NONE;
+		_sceneFinished = false;
     }
 
     void SceneOptions::Update()
     {
 		UpdateMusicStream(g_music);
+
+		//  ---------------------- Check Input ----------------------
+		if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
+		{
+			PlaySound(g_fx_coin);
+			_sceneFinished = true;
+			_transitionScreen = scene_type::GAMEPLAY;
+		}
     }
 
     void SceneOptions::Draw()
@@ -22,9 +31,14 @@ namespace hcg
 	{
 	}
 
-	bool SceneOptions::Finish()
+	bool SceneOptions::IsSceneFinished()
 	{
-		return _finishScreen;
+		return _sceneFinished;
+	}
+
+	scene_type SceneOptions::GetTransitionSceneType()
+	{
+		return _transitionScreen;
 	}
 
 	scene_type SceneOptions::GetSceneType()

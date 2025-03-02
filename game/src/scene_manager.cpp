@@ -8,10 +8,9 @@
 
 namespace hcg
 {
-
     void SceneManager::SetScene(std::unique_ptr<Scene> newScene)
-	{
-        if (currentScene) 
+    {
+        if (currentScene)
         {
             currentScene->Unload();
         }
@@ -23,7 +22,7 @@ namespace hcg
     }
 
     void SceneManager::TransitionToScene(std::unique_ptr<Scene> newScene, bool withTransition)
-	{
+    {
         if (withTransition)
         {
             transitionEnabled = true;
@@ -31,25 +30,25 @@ namespace hcg
             transitionAlpha = 0.0f;
             nextScene = std::move(newScene);
         }
-        else 
+        else
         {
             SetScene(std::move(newScene));
         }
     }
 
-    void SceneManager::Update()
-	{
-        if (transitionEnabled) 
+    void SceneManager::UpdateFrame()
+    {
+        if (transitionEnabled)
         {
             UpdateTransition();
         }
         else if (currentScene)
         {
             currentScene->Update();
-            if (currentScene->Finish())
+            if (currentScene->IsSceneFinished())
             {
                 switch (currentScene->GetSceneType())
-            	{
+                {
                 case scene_type::LOGO:
                     TransitionToScene(std::make_unique<SceneTitle>());
                     break;
@@ -70,9 +69,13 @@ namespace hcg
         }
     }
 
-    void SceneManager::Draw()
-	{
-        if (currentScene) 
+    void SceneManager::DrawFrame() const
+    {
+        BeginDrawing();
+        
+        ClearBackground(RAYWHITE);
+
+        if (currentScene)
         {
             currentScene->Draw();
         }
@@ -80,6 +83,8 @@ namespace hcg
         {
             DrawTransition();
         }
+
+        EndDrawing();
     }
 
     void SceneManager::UpdateTransition()
@@ -113,23 +118,26 @@ namespace hcg
         }
     }
 
-    
 
 
-    void SceneManager::DrawTransition()
-	{
+
+    void SceneManager::DrawTransition() const
+    {
+        ClearBackground(RAYWHITE);
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, transitionAlpha));
     }
 
     void SceneManager::Cleanup() {
-        if (currentScene) {
+        if (currentScene)
+        {
             currentScene->Unload();
             currentScene.reset();
         }
-        if (nextScene) {
+        if (nextScene)
+        {
             nextScene->Unload();
             nextScene.reset();
         }
     }
-	
+
 }

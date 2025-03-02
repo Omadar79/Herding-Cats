@@ -4,6 +4,7 @@
 
 namespace hcg
 {
+
     SpriteMoveController::SpriteMoveController(Sprite& sprite, float speed)
 		: _sprite(sprite), _posX(0), _posY(0), _velX(0), _velY(0), _speed(speed) {}
 

@@ -16,6 +16,7 @@
 #include "scene_manager.h"
 #include "scene_title.h"
 #include "scene_logo.h"
+#include "sprite_move_controller.h"
 
 
 //----------------------------------------------------------------------------------
@@ -31,6 +32,7 @@ hcg::Sprite *p_cat3_sprite = nullptr;
 hcg::Sprite *p_cat4_sprite = nullptr;
 hcg::Sprite *p_cat5_sprite = nullptr;
 hcg::Sprite *p_cat6_sprite = nullptr;
+hcg::SpriteMoveController *p_sprite_mover = nullptr;
 hcg::SceneManager SceneManager;
 
 //------------------------------------------------------------------------------
@@ -47,28 +49,16 @@ static void CleanUpObjects(void); // Clean up pointers and instantiated objects
 // Main game entry point
 int main(void)
 {
-	InitWindow(screen_width, screen_height, "Herding Cats");
-
 	InitializeGame();
-
-#ifdef GAMETESTING
-	SceneManager.SetScene(std::make_unique<hcg::SceneTitle>());
-#else
-	SceneManager.SetScene(std::make_unique<hcg::SceneLogo>());
-#endif
-
-
-	SetTargetFPS(60); // Set our game to run at 60 frames-per-second
 
 	// Main game loop
 	while (!WindowShouldClose()) // Detect window close button or ESC key
 	{
-		// the game loop logic depends on which scene we are in
-		SceneManager.Update(); 
-		BeginDrawing();
-		ClearBackground(RAYWHITE);
-		SceneManager.Draw();
-		EndDrawing();
+		//Game Logic and Input
+		SceneManager.UpdateFrame();
+
+		//Draw Graphics
+		SceneManager.DrawFrame();
 	}
 
 	UnloadGame();
@@ -79,12 +69,22 @@ int main(void)
 // Game Initialization
 void InitializeGame(void)
 {
+	InitWindow(screen_width, screen_height, "Herding Cats");
 	InitAudioDevice(); // Initialize audio device
 
 	InitializeAssets();
 
 	SetMusicVolume(g_music, 1.0f);
 	PlayMusicStream(g_music);
+
+
+#ifdef GAMETESTING
+	SceneManager.SetScene(std::make_unique<hcg::SceneTitle>());
+#else
+	SceneManager.SetScene(std::make_unique<hcg::SceneLogo>());
+#endif
+
+	SetTargetFPS(60); // Set our game to run at 60 frames-per-second
 }
 
 // Asset Initialization
@@ -191,6 +191,8 @@ void InitializeAssets(void)
 	p_cat6_sprite->addAnimation("sleeping1", "resources/sprites/Cat-6-Sleeping1.png", 50, 50, 1, 0.1f);
 	p_cat6_sprite->addAnimation("sleeping2", "resources/sprites/Cat-6-Sleeping2.png", 50, 50, 1, 0.1f);
 	p_cat6_sprite->setAnimation("licking");
+
+	p_sprite_mover = new hcg::SpriteMoveController(*p_cat1_sprite, 20);
 }
 
 // De-Initialization and unload current screen data before closing

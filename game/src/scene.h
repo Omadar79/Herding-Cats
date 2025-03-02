@@ -15,7 +15,7 @@ namespace hcg
 
 	typedef enum scene_type
 	{
-		//UNKNOWN = -1,
+		NONE = -1,
 		LOGO = 0,
 		TITLE = 1,
 		OPTIONS = 2,
@@ -35,8 +35,9 @@ namespace hcg
 		virtual void Update() = 0;
 		virtual void Draw() = 0;
 		virtual void Unload() = 0;
-		virtual bool Finish() = 0;
+		virtual scene_type GetTransitionSceneType() = 0;
 		virtual scene_type GetSceneType() = 0;
+		virtual bool IsSceneFinished() = 0;
 	};
 
 }
